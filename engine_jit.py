@@ -73,7 +73,6 @@ def evaluate(model_without_ddp, args, epoch, batch_size=64, log_writer=None):
 
     # Construct the folder name for saving generated images.
     save_folder = os.path.join(
-        "ssd/tmp",
         args.output_dir,
         "{}-steps{}-cfg{}-interval{}-{}-image{}-res{}".format(
             model_without_ddp.method, model_without_ddp.steps, model_without_ddp.cfg_scale,

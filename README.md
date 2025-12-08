@@ -100,13 +100,37 @@ main_jit.py \
 
 ### Evaluation
 
-Evaluate a trained JiT:
+PyTorch pre-trained models are available [here](https://www.dropbox.com/scl/fo/3ken1avtsd81ip67b9qpi/AK218ZNvXKSv74igVvht4PQ?rlkey=14gjrblmljewpl6ygxzlr3njm&st=ffkl77al&dl=0).
+
+Evaluate pre-trained JiT-B:
 ```
 torchrun --nproc_per_node=8 --nnodes=1 --node_rank=0 \
 main_jit.py \
---model JiT-B/16 \
---img_size 256 --noise_scale 1.0 \
---gen_bsz 128 --num_images 50000 --cfg 2.9 --interval_min 0.1 --interval_max 1.0 \
+--model JiT-B/16 (or JiT-B/32) \
+--img_size 256 (or 512) --noise_scale 1.0 (or 2.0) \
+--gen_bsz 256 --num_images 50000 --cfg 3.0 --interval_min 0.1 --interval_max 1.0 \
+--output_dir ${CKPT_DIR} --resume ${CKPT_DIR} \
+--data_path ${IMAGENET_PATH} --evaluate_gen
+```
+
+Evaluate pre-trained JiT-L:
+```
+torchrun --nproc_per_node=8 --nnodes=1 --node_rank=0 \
+main_jit.py \
+--model JiT-L/16 (or JiT-L/32) \
+--img_size 256 (or 512) --noise_scale 1.0 (or 2.0) \
+--gen_bsz 256 --num_images 50000 --cfg 2.4 (or 2.5) --interval_min 0.1 --interval_max 1.0 \
+--output_dir ${CKPT_DIR} --resume ${CKPT_DIR} \
+--data_path ${IMAGENET_PATH} --evaluate_gen
+```
+
+Evaluate pre-trained JiT-H:
+```
+torchrun --nproc_per_node=8 --nnodes=1 --node_rank=0 \
+main_jit.py \
+--model JiT-H/16 (or JiT-H/32) \
+--img_size 256 (or 512) --noise_scale 1.0 (or 2.0) \
+--gen_bsz 256 --num_images 50000 --cfg 2.2 (or 2.3) --interval_min 0.1 --interval_max 1.0 \
 --output_dir ${CKPT_DIR} --resume ${CKPT_DIR} \
 --data_path ${IMAGENET_PATH} --evaluate_gen
 ```
